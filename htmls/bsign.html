@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="../imgs/JK (2).png" type="image/x-icon" />
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        background-color: black;
+        color: #fff;
+        scroll-behavior: smooth;
+      }
+
+      .full-screen-image {
+        position: relative;
+        background-image: url("../imgs/HOME.png");
+        background-size: cover;
+        background-position: center;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+
+      .logo {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        height: 40px;
+        width: 120px;
+      }
+
+      .top-buttons {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+      }
+
+      .content-section {
+        position: relative;
+        height: 70vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        margin: 0;
+        padding: 15px;
+        transition: opacity 1s ease, transform 1s ease;
+        opacity: 0;
+        transform: translateY(100px);
+      }
+
+       .rounded-image {
+    width: 300px;
+    height: 300px;
+    margin: 0;
+    border-radius: 50%;
+    object-fit: cover;
+    transform: perspective(400px) rotate3d(1, -1, 0, calc(var(--i, 1) * 8deg));
+    -webkit-mask: linear-gradient(135deg, #000c 40%, #000, #000c 60%) 100% 100%/240% 240%;
+    mask: linear-gradient(135deg, #000c 40%, #000, #000c 60%) 100% 100%/240% 240%;
+    transition: 0.4s;
+    cursor: pointer;
+  }
+
+  .rounded-image:hover {
+    --i: -1;
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+    filter: drop-shadow(12px 8px 20px rgb(163, 163, 163));
+  }
+
+      .content {
+        padding-left: 100px;
+        padding-right: 100px;
+      }
+
+      h4 {
+        position: relative;
+        cursor: pointer;
+        display: inline-block;
+        margin-top: 50px;
+      }
+
+      h4::after {
+      content: "";
+      position: absolute;
+      bottom: -5px; 
+      left: 0;
+      width: 100%; 
+      height: 2px;
+      background-color: red; 
+    }
+
+      .visible {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+      }
+      @keyframes fadeSlideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-100px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fallEffect {
+        from {
+          box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+        }
+        to {
+          box-shadow: 0 0 0 rgba(255, 0, 0, 0);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .content-section {
+          height: auto;
+        }
+
+        .rounded-image {
+          width: 200px;
+          height: 200px;
+        }
+
+        .content {
+          padding: 10px;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .logo {
+          width: 60px;
+        }
+
+        .top-buttons {
+          top: 10px;
+          right: 10px;
+        }
+
+        .rounded-image {
+          width: 150px;
+          height: 150px;
+        }
+      }
+      #footer {
+        padding: 7rem 3rem 80px;
+        background: #000000; 
+      }
+
+      h2 {
+        color: red; 
+      }
+
+      .logo-footer {
+        max-width: 100%;
+      }
+
+      .useful-link ul li a {
+        color: #777777;
+        font-size: 15px;
+        font-weight: 500;
+        text-decoration: none;
+      }
+
+      .useful-link ul li a:hover {
+        color: rgb(255, 255, 255); 
+      }
+
+      .social-icons li {
+        margin: 0.5rem 0;
+      }
+
+      .social-icons a {
+        display: flex;
+        align-items: center;
+        font-size: 26px;
+        color: #fff;
+        transition: all 0.3s ease-in-out;
+        text-decoration: none;
+      }
+      #facebook-icon:hover {
+        color: #365899;
+      }
+
+      #instagram-icon:hover {
+        color: #E1306C;
+      }
+
+      #linkedin-icon:hover {
+        color: #005582;
+      }
+
+      .social-icons a i {
+        margin-right: 10px;
+      }
+
+      .address-links li a {
+        color: #777777;
+        font-size: 15px;
+        font-weight: 500;
+      }
+
+      .address-links li i {
+        color: red; 
+        font-size: 18px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="full-screen-image">
+      <img src="../imgs/logo-removebg-preview.png" alt="Logo" class="logo" />
+      <div class="top-buttons">
+        <button class="btn" style="background-color: red; color: #fff" ><a href="../htmls/sign.html" style="text-decoration: none;color: #fff;">
+          Sign in
+        </a></button>
+        <button class="btn" style="background-color: red; color: #fff" ><a href="../htmls/adminlogin.html" style="text-decoration: none;color: #fff;">
+          Admin
+        </a></button>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="content-section" id="section1">
+        <img src="../imgs/veg.jpg" alt="Left Image" class="rounded-image" />
+        <div class="content">
+          <h4>PURE-VEG !</h4>
+          <p>
+            "Delve into the vibrant world of fresh and flavorful vegetarian
+            dishes that bring the essence of nature to your plate. From crisp
+            garden salads to hearty curries and wholesome stir-fries, our
+            vegetarian offerings celebrate the richness of seasonal produce.
+            Carefully crafted with a balance of taste and nutrition, these
+            dishes are a feast for both the palate and the soul. Whether you're
+            looking for a light, refreshing meal or a comforting, home-style
+            favorite, our veg dishes promise to delight every food lover."
+          </p>
+        </div>
+      </div>
+
+      <div class="content-section" id="section2">
+        <img src="../imgs/fish.jpg" alt="Right Image" class="rounded-image" />
+        <div class="content">
+          <h4>NON-VEG !</h4>
+          <p>
+            "Indulge in the irresistible flavors of our non-vegetarian dishes,
+            crafted to perfection for meat lovers. From juicy, tender cuts of
+            chicken and lamb to the freshest seafood bursting with flavor, every
+            bite is a celebration of taste. Savor the rich, aromatic spices
+            infused in our traditional recipes or explore our modern takes on
+            global classics. Whether you crave the smoky char of grilled meats,
+            the succulent tenderness of curries, or the crispy delight of fried
+            favorites, our non-veg offerings promise an unforgettable dining
+            experience. Perfect for any occasion, let our dishes tantalize your
+            taste buds and leave you craving for more."
+          </p>
+        </div>
+      </div>
+
+      <div class="content-section" id="section3">
+        <img src="../imgs/chips.jpg" alt="Left Image" class="rounded-image" />
+        <div class="content">
+          <h4>SNACKS !</h4>
+          <p>
+            "Indulge in our delightful selection of snacks, perfect for any time
+            of the day. From crispy chips to savory munchies, our snacks are
+            crafted to satisfy your cravings. Whether you're enjoying a movie
+            night, hosting friends, or simply looking for a quick bite, we have
+            something for everyone. Packed with flavor and freshness, our snacks
+            are made with quality ingredients to ensure a delicious and
+            satisfying experience. Explore our range of irresistible options and
+            treat yourself to a perfect snack today!"
+          </p>
+        </div>
+      </div>
+
+      <div class="content-section" id="section4">
+        <img src="../imgs/piz.jpg" alt="Right Image" class="rounded-image" />
+        <div class="content">
+          <h4>FAST FOODS !</h4>
+          <p>
+            Indulge in a variety of mouthwatering fast foods, perfect for when
+            you're craving something quick, delicious, and satisfying. From
+            crispy fries and juicy burgers to savory wraps and sandwiches, our
+            fast food options cater to every taste. Whether you're on the go or
+            enjoying a casual meal with friends, our menu offers something for
+            everyone, made with fresh ingredients and packed with flavor. Fast
+            food doesn't have to mean compromising on taste—experience the
+            perfect balance of speed and quality with every bite!
+          </p>
+        </div>
+      </div>
+
+      <div class="content-section" id="section5">
+        <img src="../imgs/juice.jpg" alt="Left Image" class="rounded-image" />
+        <div class="content">
+          <h4>REFRESHING JUICES !</h4>
+          <p>
+            "Refresh yourself with our freshly squeezed juices, packed with
+            natural flavors and nutrients. Made from the finest fruits, our
+            juices are not only a delicious treat but also a healthy choice to
+            energize your day. Whether you're craving the tangy zest of citrus,
+            the sweetness of tropical fruits, or the refreshing coolness of
+            watermelon, we have something for every taste. Enjoy a glass of pure
+            freshness with every sip, and experience the vibrant taste of
+            nature’s goodness!"
+          </p>
+        </div>
+      </div>
+
+      <div class="content-section" id="section6">
+        <img src="../imgs/ice.jpg" alt="Right Image" class="rounded-image" />
+        <div class="content">
+          <h4>SWEET ICE CREAM !</h4>
+          <p>
+            "Indulge in the creamy, dreamy world of our delicious ice creams,
+            crafted to satisfy your sweet cravings. Whether you prefer classic
+            vanilla, rich chocolate, or refreshing fruit flavors, we have
+            something for everyone. Made with the finest ingredients and a dash
+            of love, our ice creams promise a delightful treat that melts in
+            your mouth. Perfect for any occasion, from hot summer days to cozy
+            gatherings, our ice creams are sure to bring a smile to your face
+            and a chill to your senses. Treat yourself to a scoop (or two) today
+            and experience the ultimate frozen delight!"
+          </p>
+        </div>
+      </div>
+    </div>
+    <footer id="footer"><hr style="background-color: #fff;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <a href="index.html">
+          <img src="../imgs/Kiruba__1_-removebg-preview.png" 
+               alt="Footer Logo" class="img-fluid logo-footer">
+        </a>
+      </div>
+      
+      <div class="col-md-3">
+        <div class="useful-link">
+          <h2>Useful Links</h2>
+          <img src="./assets/images/about/home_line.png" alt="" class="img-fluid">
+          <ul class="use-links" style="list-style-type: none;">
+            <li><a href="sign.html"><i class="fa-solid fa-angles-right"></i> Home</a></li>
+            <li><a href="sign.html"><i class="fa-solid fa-angles-right"></i> About Us</a></li>
+            <li><a href="sign.html"><i class="fa-solid fa-angles-right"></i> Order</a></li>
+            <li><a href="sign.html"><i class="fa-solid fa-angles-right"></i> Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="col-md-3">
+        <div class="social-links">
+          <h2>Follow Us</h2>
+          <img src="./assets/images/about/home_line.png" alt="">
+          <ul class="social-icons"style="list-style-type: none;">
+            <li><a href="#"><i class="fab fa-facebook-f" id="facebook-icon"></i></a></li>
+            <li><a href="#"><i class="fab fa-instagram" id="instagram-icon"></i></a></li>
+            <li><a href="#"><i class="fab fa-linkedin-in" id="linkedin-icon"></i></a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="col-md-3">
+        <div class="address">
+          <h2>Address</h2>
+          <img src="./assets/images/about/home_line.png" alt="" class="img-fluid">
+          <ul class="address-links"style="list-style-type: none;">
+            <li class="address1">
+              <i class="fa-solid fa-location-dot"></i> Balan Nagar,Pudukkottai,Tamilnadu
+            </li>
+            <li><a href="tel:+9190904500112"><i class="fa-solid fa-phone"></i> +91 9876543210</a></li>
+            <li><a href="mailto:skirubakaran2005@gmail.com"><i class="fa-solid fa-envelope"></i> skirubakaran2005@gmail.com</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+    <script>
+      function handleScrollAnimations() {
+        const sections = document.querySelectorAll(".content-section");
+        sections.forEach((section) => {
+          const rect = section.getBoundingClientRect();
+          const isVisible = rect.top < window.innerHeight && rect.bottom >= 0;
+
+          if (isVisible) {
+            section.classList.add("visible");
+          } else {
+            section.classList.remove("visible");
+          }
+        });
+      }
+      document.addEventListener("scroll", handleScrollAnimations);
+      handleScrollAnimations();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        height: 100%;
+        background-color: #000;
+        color: #fff;
+      }
+
+      .navbar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 20px;
+        z-index: 1000;
+      }
+
+      .navbar .logo img {
+        height: 40px;
+        width: 120px;
+      }
+
+      .navbar .nav-items {
+        display: flex;
+        gap: 20px;
+      }
+
+      .navbar .nav-items a {
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        position: relative;
+      }
+
+      .navbar .nav-items a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 0;
+        height: 2px;
+        background-color: red;
+        transition: width 0.3s ease-in-out;
+      }
+
+      .navbar .nav-items a:hover::after {
+        width: 100%;
+      }
+
+      .hamburger {
+        display: none;
+        font-size: 24px;
+        color: white;
+        cursor: pointer;
+      }
+
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 250px;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 9999;
+        padding-top: 20px;
+      }
+
+      .sidebar.active {
+        transform: translateX(0);
+      }
+
+      .sidebar .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        font-size: 24px;
+        cursor: pointer;
+        color: white;
+        padding: 10px;
+        z-index: 10000;
+      }
+
+      .sidebar ul {
+        list-style-type: none;
+        padding-left: 20px;
+        margin-top: 30px;
+      }
+
+      .sidebar ul li {
+        padding: 10px 0;
+      }
+
+      .sidebar ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        position: relative;
+      }
+
+      .sidebar ul li a:hover::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -2px;
+        height: 2px;
+        background-color: red;
+      }
+
+      @media (max-width: 768px) {
+        .navbar .nav-items {
+          display: none;
+        }
+        .hamburger {
+          display: block;
+        }
+      }
+
+      .profile-container {
+        margin-top: 150px;
+        padding: 50px;
+      }
+
+      .profile-header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .profile-header h1 {
+        font-size: 32px;
+        margin-bottom: 10px;
+      }
+
+      .profile-header p {
+        font-size: 18px;
+        color: #aaa;
+      }
+
+      .profile-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 30px;
+      }
+
+      .profile-info img {
+        border-radius: 50%;
+        width: 150px;
+        height: 150px;
+        margin-bottom: 20px;
+      }
+
+      .profile-info .info {
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+
+      .orders-container {
+        margin-top: 20px;
+        background-color: #111;
+        padding: 20px;
+        border-radius: 10px;
+      }
+
+      .orders-container h2 {
+        font-size: 24px;
+        margin-bottom: 15px;
+      }
+
+      .orders-container .order-info {
+        margin-bottom: 10px;
+        font-size: 16px;
+      }
+
+      .logout-button {
+        background-color: red;
+        color: white;
+        border: none;
+        padding: 14px 25px;
+        border-radius: 10px;
+        font-size: 16px;
+        transition: background-color 0.3s, transform 0.3s;
+        cursor: pointer;
+        margin-top: 20px;
+      }
+
+      .logout-button:hover {
+        background-color: #d9534f;
+        transform: translateY(-2px);
+      }
+
+      .logout-button:focus {
+        outline: none;
+      }
+      #footer {
+        padding: 7rem 3rem 80px;
+        background: #000000; 
+      }
+
+      h2 {
+        color: red; 
+      }
+
+      .logo-footer {
+        max-width: 100%;
+      }
+
+      .useful-link ul li a {
+        color: #777777;
+        font-size: 15px;
+        font-weight: 500;
+        text-decoration: none;
+      }
+
+      .useful-link ul li a:hover {
+        color: rgb(255, 255, 255); 
+      }
+
+      .social-icons li {
+        margin: 0.5rem 0;
+      }
+
+      .social-icons a {
+        display: flex;
+        align-items: center;
+        font-size: 26px;
+        color: #fff;
+        transition: all 0.3s ease-in-out;
+        text-decoration: none;
+      }
+      #facebook-icon:hover {
+        color: #365899;
+      }
+
+      #instagram-icon:hover {
+        color: #E1306C;
+      }
+
+      #linkedin-icon:hover {
+        color: #005582;
+      }
+
+      .social-icons a i {
+        margin-right: 10px;
+      }
+
+      .address-links li a {
+        color: #777777;
+        font-size: 15px;
+        font-weight: 500;
+      }
+
+      .address-links li i {
+        color: red; 
+        font-size: 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="logo">
+        <img src="../imgs/LOGO.png" alt="Logo" />
+      </div>
+      <div class="nav-items">
+        <a href="../htmls/home.html">&nbsp;&nbsp;&nbsp;Home&nbsp;&nbsp;&nbsp;</a>
+        <a href="../htmls/about.html">&nbsp;&nbsp;&nbsp;About&nbsp;&nbsp;&nbsp;</a>
+        <a href="../htmls/order.html">&nbsp;&nbsp;&nbsp;Order&nbsp;&nbsp;&nbsp;</a>
+        <a href="#">&nbsp;&nbsp;&nbsp;Contact&nbsp;&nbsp;&nbsp;</a>
+        <a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-user"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+      </div>
+      <span class="hamburger" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+      </span>
+    </div>
+
+    <div class="sidebar" id="sidebar">
+      <span class="close-btn" onclick="toggleSidebar()">&times;</span>
+      <ul>
+        <li><a href="../htmls/home.html">Home</a></li>
+        <li><a href="../htmls/about.html">About</a></li>
+        <li><a href="../htmls/order.html">Order</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#"><i class="fas fa-user"></i></a></li>
+      </ul>
+    </div>
+
+   <div class="container profile-container">
+  <div class="profile-header">
+    <h1>Your Profile</h1>
+    <p>Manage your account details and preferences</p>
+  </div>
+  <div class="profile-info">
+    <img src="../imgs/user-avatar.png" alt="User Avatar" />
+    <div class="info" id="profile-name">Name: John Doe</div>
+    <div class="info" id="profile-email">Email: john.doe@example.com</div>
+    <button class="edit-profile-button">Edit Profile</button>
+  </div>
+</div>
+
+
+      <div class="orders-container">
+        <h2>Order Summary</h2>
+        <div class="order-info">Total Orders Today: 5</div>
+        <div class="order-info">Total Amount Spent Today: $50</div>
+        <div class="order-info">Total Orders This Month: 20</div>
+        <div class="order-info">Total Amount Spent This Month: $200</div>
+        <div class="order-info">Total Orders This Year: 
+        <div class="order-info">Total Orders This Year: 150</div>
+        <div class="order-info">Total Amount Spent This Year: $1800</div>
+      </div>
+
+      <div class="settings-container">
+        <h2>Account Settings</h2>
+        <button class="edit-profile-button">Change Password</button>
+        <button class="edit-profile-button">Update Email</button>
+        <button class="edit-profile-button">Update Phone Number</button>
+      </div>
+
+      <div class="logout-section">
+        <button class="logout-button" onclick="handleLogout()">Logout</button>
+      </div>
+    </div>
+    <footer id="footer"><hr>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <a href="index.html">
+          <img src="../imgs/Kiruba__1_-removebg-preview.png" 
+               alt="Footer Logo" class="img-fluid logo-footer">
+        </a>
+      </div>
+      
+      <div class="col-md-3">
+        <div class="useful-link">
+          <h2>Useful Links</h2>
+          <img src="./assets/images/about/home_line.png" alt="" class="img-fluid">
+          <ul class="use-links" style="list-style-type: none;">
+            <li><a href="index.html"><i class="fa-solid fa-angles-right"></i> Home</a></li>
+            <li><a href="about.html"><i class="fa-solid fa-angles-right"></i> About Us</a></li>
+            <li><a href="gallery.html"><i class="fa-solid fa-angles-right"></i> Order</a></li>
+            <li><a href="contact.html"><i class="fa-solid fa-angles-right"></i> Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="col-md-3">
+        <div class="social-links">
+          <h2>Follow Us</h2>
+          <img src="./assets/images/about/home_line.png" alt="">
+          <ul class="social-icons"style="list-style-type: none;">
+            <li><a href="#"><i class="fab fa-facebook-f" id="facebook-icon"></i></a></li>
+            <li><a href="#"><i class="fab fa-instagram" id="instagram-icon"></i></a></li>
+            <li><a href="#"><i class="fab fa-linkedin-in" id="linkedin-icon"></i></a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="col-md-3">
+        <div class="address">
+          <h2>Address</h2>
+          <img src="./assets/images/about/home_line.png" alt="" class="img-fluid">
+          <ul class="address-links"style="list-style-type: none;">
+            <li class="address1">
+              <i class="fa-solid fa-location-dot"></i> Balan Nagar,Pudukkottai,Tamilnadu
+            </li>
+            <li><a href="tel:+919876543210"><i class="fa-solid fa-phone"></i> +91 9876543210</a></li>
+            <li><a href="mailto:skirubakaran2005@gmail.com"><i class="fa-solid fa-envelope"></i> skirubakaran2005@gmail.com</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+    <script>
+      // Function to toggle sidebar visibility
+function toggleSidebar() {
+  const sidebar = document.getElementById("sidebar");
+  sidebar.classList.toggle("active");
+}
+
+// Handle logout action
+function handleLogout() {
+  alert("You have been logged out.");
+  window.location.href = "../htmls/login.html"; // Redirect to login page
+}
+
+// Fetch user details using the email
+async function fetchUserDetails(email) {
+  try {
+    const response = await fetch(`http://localhost:3000/api/user/${email}`);
+    const data = await response.json();
+    
+    if (response.ok) {
+      document.getElementById("profile-name").innerText = `Name: ${data.user.full_name}`;
+      document.getElementById("profile-email").innerText = `Email: ${data.user.email}`;
+    } else {
+      console.error("Failed to fetch user details:", data.error);
+    }
+  } catch (err) {
+    console.error("Error fetching user details:", err);
+  }
+}
+
+// Fetch user order details
+async function fetchOrderDetails(email) {
+  try {
+    const response = await fetch(`http://localhost:3000/api/orders/${email}`);
+    const data = await response.json();
+    
+    if (response.ok) {
+      document.querySelector(".orders-container .order-info:nth-child(1)").innerText = `Total Orders Today: ${data.orderSummary.total_orders_today}`;
+      document.querySelector(".orders-container .order-info:nth-child(2)").innerText = `Total Amount Spent Today: $${data.orderSummary.total_spent_today}`;
+    } else {
+      console.error("Failed to fetch order details:", data.error);
+    }
+  } catch (err) {
+    console.error("Error fetching order details:", err);
+  }
+}
+
+// On page load, fetch user and order details
+document.addEventListener("DOMContentLoaded", () => {
+  // Retrieve email from session storage, local storage or other source
+  const email = localStorage.getItem("userEmail") || "john.doe@example.com"; // Example fallback email
+  fetchUserDetails(email);
+  fetchOrderDetails(email);
+});
+
+  </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

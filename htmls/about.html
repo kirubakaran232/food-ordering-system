@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        height: 100%;
+        background-color: #000;
+        color: #fff;
+      }
+
+      .navbar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 20px;
+        z-index: 1000;
+      }
+
+      .navbar .logo img {
+        height: 40px;
+        width: 120px;
+      }
+
+      .navbar .nav-items {
+        display: flex;
+        gap: 20px;
+      }
+
+      .navbar .nav-items a {
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        position: relative;
+      }
+
+      .navbar .nav-items a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background-color: red;
+      transition: width 0.3s ease-in-out;
+    }
+
+    .navbar .nav-items a:hover::after {
+      width: 100%;
+    }
+
+      .hamburger {
+        display: none;
+        font-size: 24px;
+        color: white;
+        cursor: pointer;
+      }
+
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 250px;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 9999;
+        padding-top: 20px;
+      }
+
+      .sidebar.active {
+        transform: translateX(0);
+      }
+
+      .sidebar .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        font-size: 24px;
+        cursor: pointer;
+        color: white;
+        padding: 10px;
+        z-index: 10000;
+      }
+
+      .sidebar ul {
+        list-style-type: none;
+        padding-left: 20px;
+        margin-top: 30px;
+      }
+
+      .sidebar ul li {
+        padding: 10px 0;
+      }
+
+      .sidebar ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        position: relative;
+      }
+
+      .sidebar ul li a:hover::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -2px;
+        height: 2px;
+        background-color: red;
+      }
+
+      @media (max-width: 768px) {
+        .navbar .nav-items {
+          display: none;
+        }
+        .hamburger {
+          display: block;
+        }
+      }
+
+      .carousel-item {
+        height: 100vh;
+        position: relative;
+      }
+
+      .carousel-item img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+      }
+
+      .carousel-caption {
+        position: absolute;
+        bottom: 20%;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        opacity: 0;
+        transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+      }
+
+      .carousel-item.active .carousel-caption {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+
+      .carousel-caption h3 {
+        font-size: 2.5rem;
+        color: #fff;
+        margin-bottom: 15px;
+      }
+
+      .carousel-caption p {
+        font-size: 1.2rem;
+        color: #ddd;
+      }
+
+      .about-msg {
+        padding-top: 50px;
+        text-align: left;
+        padding-left: 80px;
+        padding-right: 80px;
+      }
+
+      .about-msg h1 {
+        color: red;
+        padding-bottom: 40px;
+      }
+      .about-msg .about-image img {
+        width: 100%;
+        border-radius: 10px;
+        transform: translateX(100%);
+        transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+        opacity: 0;
+      }
+
+      .about-msg .about-image img.visible {
+        transform: translateX(0);
+        opacity: 1;
+      }
+
+      .about-vis {
+        padding-top: 10px;
+        text-align: left;
+        padding-left: 80px;
+        padding-right: 80px;
+      }
+
+      .about-vis h1 {
+        color: red;
+        padding-bottom: 30px;
+      }
+
+      .team-section {
+        text-align: center;
+        margin: 50px 0;
+      }
+
+      .team-section h1 {
+        text-align: left;
+        padding-left: 60px;
+        font-size: 2.5rem;
+        font-weight: bold;
+      }
+
+      .team-section h1 span {
+        color: rgb(255, 0, 0);
+      }
+
+      .team-card {
+        border: none;
+        text-align: center;
+        padding: 20px;
+      }
+
+      .team-card img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        border: 5px solid #ff0000;
+      }
+
+      .team-title {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-top: 10px;
+      }
+      #footer {
+        padding: 7rem 3rem 80px;
+        background: #000000; 
+      }
+
+      h2 {
+        color: red; 
+      }
+
+      .logo-footer {
+        max-width: 100%;
+      }
+
+      .useful-link ul li a {
+        color: #777777;
+        font-size: 15px;
+        font-weight: 500;
+        text-decoration: none;
+      }
+
+      .useful-link ul li a:hover {
+        color: rgb(255, 255, 255); 
+      }
+
+      .social-icons li {
+        margin: 0.5rem 0;
+      }
+
+      .social-icons a {
+        display: flex;
+        align-items: center;
+        font-size: 26px;
+        color: #fff;
+        transition: all 0.3s ease-in-out;
+        text-decoration: none;
+      }
+      #facebook-icon:hover {
+        color: #365899;
+      }
+
+      #instagram-icon:hover {
+        color: #E1306C;
+      }
+
+      #linkedin-icon:hover {
+        color: #005582;
+      }
+
+      .social-icons a i {
+        margin-right: 10px;
+      }
+
+      .address-links li a {
+        color: #777777;
+        font-size: 15px;
+        font-weight: 500;
+      }
+
+      .address-links li i {
+        color: red; 
+        font-size: 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="logo">
+        <img src="../imgs/LOGO.png" alt="Logo" />
+      </div>
+      <div class="nav-items">
+        <a href="../htmls/home.html">&nbsp;&nbsp;&nbsp;Home&nbsp;&nbsp;&nbsp;</a>
+        <a href="#">&nbsp;&nbsp;&nbsp;About&nbsp;&nbsp;&nbsp;</a>
+        <a href="../htmls/order.html">&nbsp;&nbsp;&nbsp;Order&nbsp;&nbsp;&nbsp;</a>
+        <a href="../htmls/contact.html">&nbsp;&nbsp;&nbsp;Contact&nbsp;&nbsp;&nbsp;</a>
+        <a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-user"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+      </div>
+      <span class="hamburger" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+      </span>
+    </div>
+
+    <div class="sidebar" id="sidebar">
+      <span class="close-btn" onclick="toggleSidebar()">&times;</span>
+      <ul>
+        <li><a href="../htmls/home.html">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="../htmls/order.html">Order</a></li>
+        <li><a href="../htmls/contact.html">Contact</a></li>
+        <li><a href="#"><i class="fas fa-user"></i></a></li>
+      </ul>
+    </div>
+   <div
+      id="fullscreenCarousel"
+      class="carousel slide"
+      data-bs-ride="carousel"
+      data-bs-interval="3000"
+    >
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img
+            src="../imgs/Untitled design.png"
+            class="d-block w-100"
+            alt="Image 1"
+          />
+          <div class="carousel-caption">
+            <h3>Delicious Pizza</h3>
+            <p>Indulge in the rich flavors of handcrafted pizzas, made with the finest ingredients and baked to perfection.</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img
+            src="../imgs/pexels-piotr-arnoldes-7862031-6111947.jpg"
+            class="d-block w-100"
+            alt="Image 2"
+          />
+          <div class="carousel-caption">
+            <h3>Gourmet Burger</h3>
+            <p>Savor the taste of perfection with our juicy, handcrafted gourmet burgers, made with the finest ingredients.</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img
+            src="../imgs/pexels-owpictures-106343.jpg"
+            class="d-block w-100"
+            alt="Image 3"
+          />
+          <div class="carousel-caption">
+            <h3>Gourmet Chicken</h3>
+<p>Indulge in the rich flavors of our perfectly seasoned and expertly cooked gourmet chicken dishes.</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img
+            src="../imgs/pexels-paggiarofrancesco-1117862.jpg"
+            class="d-block w-100"
+            alt="Image 4"
+          />
+          <div class="carousel-caption">
+            <h3>Gourmet Roti</h3>
+<p>Delight in the soft, freshly prepared gourmet rotis, crafted to complement every meal perfectly.</p>
+          </div>
+        </div>
+      </div>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#fullscreenCarousel"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#fullscreenCarousel"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+    <div class="about-msg">
+  <div class="row">
+    <div class="col-md-7">
+      <h1><b>Who we are?</b></h1>
+      <p>
+        Are you tired of bland, uninspiring meals that leave you feeling unsatisfied? At Kiruba Foods, we understand that a truly wholesome meal doesn't just nourish the body, it nourishes the heart and soul. That's why our dedicated home chefs are passionate about creating meals that are not only delicious but also infused with love and care.
+        With Kiruba Foods, you can indulge in the comforting taste of homemade meals, just like how mom makes! Imagine savoring a meal that is not only delicious but also made with the same love and care you would expect from your mother.
+        But it's not just about the taste—we also strive to empower your family and community to be as healthy as they can be. We believe that a healthy diet is the foundation of a happy and fulfilled life, and our mission is to make it easy for you to access the nutritious home-cooked meals you need to thrive.
+        So why settle for mediocre meals when you can have the taste of home and the peace of mind that comes with knowing you are feeding yourself and your loved ones with the best? Try Kiruba Foods today and experience the difference for yourself.
+      </p>
+    </div>
+    <div class="col-md-5">
+      <div class="about-image">
+        <img src="../imgs/chef.png" alt="Delicious Food" class="scroll-reveal" />
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="about-vis">
+      <h1><b>Vision & Mission</b></h1>
+      <h4 style="color: #ff0000ca;"><b>Vision</b></h4>
+      <h6>
+        <b
+          >To nourish humanity with wholesome food and spread the joy of
+          well-being.</b
+        >
+      </h6>
+      <p>
+        Our brand vision is to become the leading platform for healthy homemade
+        food, where customers can trust and rely on us to understand and care
+        for their needs while making a deeper social impact in the communities
+        we serve. We strive to be an inclusive brand, promoting healthy eating
+        lifestyles and equal opportunities for all.
+      </p>
+      <h4 style="color: #ff0000ca;"><b>Mission</b></h4>
+      <h6>
+        <b>Empowering communities with accessible and nutritious mom-food
+          through technology and home kitchens.</b
+        >
+      </h6>
+      <p>
+        Our mission is to enable homemade food to be accessible to everyone, to
+        improve well-being through the power of technology, and to unlock
+        100,000 home kitchens to create a better India in 2 years.
+      </p>
+    </div>
+    <div class="container team-section">
+      <h1>Our team of <span>foodies</span></h1>
+      <div class="row mt-4">
+        <div class="col-md-3 col-sm-6">
+          <div class="team-card">
+            <img src="../imgs/681,700+ Chef Stock Photos, Pictures & Royalty-Free Images.jpg" alt="Praba Santhana" />
+            <p class="team-title">Dinesh</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="team-card">
+            <img src="../imgs/Chef Logo Imagens – Procure 2,250,198 fotos, vetores e vídeos.jpg" alt="Saravanakumar" />
+            <p class="team-title">Abinaya</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="team-card">
+            <img src="../imgs/Female Chef.jpg" alt="Nirmalkumar" />
+            <p class="team-title">Shree</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="team-card">
+            <img src="../imgs/Men's Short Sleeve Single Breasted Executive Chef Coat - ChefUniforms.jpg" alt="Vandhana" />
+            <p class="team-title">Mani</p>
+          </div>
+        </div>
+      </div>
+    </div>
+<footer id="footer"><hr>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <a href="index.html">
+          <img src="../imgs/Kiruba__1_-removebg-preview.png" 
+               alt="Footer Logo" class="img-fluid logo-footer">
+        </a>
+      </div>
+      
+      <div class="col-md-3">
+        <div class="useful-link">
+          <h2>Useful Links</h2>
+          <img src="./assets/images/about/home_line.png" alt="" class="img-fluid">
+          <ul class="use-links" style="list-style-type: none;">
+            <li><a href="index.html"><i class="fa-solid fa-angles-right"></i> Home</a></li>
+            <li><a href="about.html"><i class="fa-solid fa-angles-right"></i> About Us</a></li>
+            <li><a href="order.html"><i class="fa-solid fa-angles-right"></i> Order</a></li>
+            <li><a href="contact.html"><i class="fa-solid fa-angles-right"></i> Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="col-md-3">
+        <div class="social-links">
+          <h2>Follow Us</h2>
+          <img src="./assets/images/about/home_line.png" alt="">
+          <ul class="social-icons"style="list-style-type: none;">
+            <li><a href="#"><i class="fab fa-facebook-f" id="facebook-icon"></i></a></li>
+            <li><a href="#"><i class="fab fa-instagram" id="instagram-icon"></i></a></li>
+            <li><a href="#"><i class="fab fa-linkedin-in" id="linkedin-icon"></i></a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="col-md-3">
+        <div class="address">
+          <h2>Address</h2>
+          <img src="./assets/images/about/home_line.png" alt="" class="img-fluid">
+          <ul class="address-links"style="list-style-type: none;">
+            <li class="address1">
+              <i class="fa-solid fa-location-dot"></i> Balan Nagar,Pudukkottai,Tamilnadu
+            </li>
+            <li><a href="tel:+9190904500112"><i class="fa-solid fa-phone"></i> +91 9876543210</a></li>
+            <li><a href="mailto:skirubakaran2005@gmail.com"><i class="fa-solid fa-envelope"></i> skirubakaran2005@gmail.com</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+    <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const scrollRevealElements = document.querySelectorAll(".scroll-reveal");
+
+    const observerOptions = {
+      root: null, // Observing the viewport
+      threshold: 0.1, // Element becomes visible when 10% is in view
+    };
+
+    const revealOnScroll = (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target); // Stop observing once revealed
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(revealOnScroll, observerOptions);
+
+    scrollRevealElements.forEach((element) => {
+      observer.observe(element);
+    });
+  });
+</script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

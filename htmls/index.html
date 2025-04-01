@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loading Page</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+    />
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        background-color: #000000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Arial, sans-serif;
+      }
+
+      .outer-rotate {
+        animation: rotatePizza 5s linear infinite;
+      }
+
+      .pizza-loader {
+        position: relative;
+        width: 100px;
+        height: 100px;
+        animation: blinkSize 2s ease-in-out infinite;
+      }
+
+      .pizza-loader img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      @keyframes rotatePizza {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes blinkSize {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.5);
+        }
+      }
+    </style>
+    <script>
+      setTimeout(function () {
+        window.location.href = "bsign.html";
+      }, 5000);
+    </script>
+  </head>
+  <body>
+    <div class="outer-rotate">
+      <div class="pizza-loader">
+        <img src="../imgs/pizza.png" alt="Pizza Loading" />
+      </div>
+    </div>
+  </body>
+</html>

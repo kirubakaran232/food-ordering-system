@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        height: 100%;
+        background-color: #000;
+        color: #fff;
+      }
+
+      .navbar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 20px;
+        z-index: 1000;
+      }
+
+      .navbar .logo img {
+        height: 40px;
+        width: 120px;
+      }
+
+      .navbar .nav-items {
+        display: flex;
+        gap: 20px;
+      }
+
+      .navbar .nav-items a {
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        position: relative;
+      }
+
+      .navbar .nav-items a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 0;
+        height: 2px;
+        background-color: red;
+        transition: width 0.3s ease-in-out;
+      }
+
+      .navbar .nav-items a:hover::after {
+        width: 100%;
+      }
+
+      .hamburger {
+        display: none;
+        font-size: 24px;
+        color: white;
+        cursor: pointer;
+      }
+
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 250px;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 9999;
+        padding-top: 20px;
+      }
+
+      .sidebar.active {
+        transform: translateX(0);
+      }
+
+      .sidebar .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        font-size: 24px;
+        cursor: pointer;
+        color: white;
+        padding: 10px;
+        z-index: 10000;
+      }
+
+      .sidebar ul {
+        list-style-type: none;
+        padding-left: 20px;
+        margin-top: 30px;
+      }
+
+      .sidebar ul li {
+        padding: 10px 0;
+      }
+
+      .sidebar ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        position: relative;
+      }
+
+      .sidebar ul li a:hover::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -2px;
+        height: 2px;
+        background-color: red;
+      }
+
+      @media (max-width: 768px) {
+        .navbar .nav-items {
+          display: none;
+        }
+        .hamburger {
+          display: block;
+        }
+      }
+
+      .form-control {
+        background-color: #111;
+        border: 1px solid #444;
+        color: #fff;
+        border-radius: 10px;
+        padding: 14px;
+        margin-bottom: 15px;
+        transition: background-color 0.3s, border-color 0.3s;
+      }
+
+      .form-control:focus {
+        background-color: #222;
+        color: #fff;
+        box-shadow: none;
+        border-color: red;
+      }
+
+      .contact-container {
+        margin-top: 150px;
+        padding: 50px;
+      }
+
+      .contact-description {
+        font-size: 18px;
+        margin-bottom: 30px;
+        line-height: 1.6;
+      }
+
+      .send-button {
+        background-color: red;
+        color: white;
+        border: none;
+        padding: 14px 25px;
+        border-radius: 10px;
+        font-size: 16px;
+        transition: background-color 0.3s, transform 0.3s;
+        cursor: pointer;
+      }
+
+      .send-button:hover {
+        background-color: #d9534f;
+        transform: translateY(-2px);
+      }
+
+      .send-button:focus {
+        outline: none;
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .col-md-6 {
+        padding: 0 20px;
+      }
+      #footer {
+        padding: 7rem 3rem 80px;
+        background: #000000; 
+      }
+
+      h2 {
+        color: red; 
+      }
+
+      .logo-footer {
+        max-width: 100%;
+      }
+
+      .useful-link ul li a {
+        color: #777777;
+        font-size: 15px;
+        font-weight: 500;
+        text-decoration: none;
+      }
+
+      .useful-link ul li a:hover {
+        color: rgb(255, 255, 255); 
+      }
+
+      .social-icons li {
+        margin: 0.5rem 0;
+      }
+
+      .social-icons a {
+        display: flex;
+        align-items: center;
+        font-size: 26px;
+        color: #fff;
+        transition: all 0.3s ease-in-out;
+        text-decoration: none;
+      }
+      #facebook-icon:hover {
+        color: #365899;
+      }
+
+      #instagram-icon:hover {
+        color: #E1306C;
+      }
+
+      #linkedin-icon:hover {
+        color: #005582;
+      }
+
+      .social-icons a i {
+        margin-right: 10px;
+      }
+
+      .address-links li a {
+        color: #777777;
+        font-size: 15px;
+        font-weight: 500;
+      }
+
+      .address-links li i {
+        color: red; 
+        font-size: 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="logo">
+        <img src="../imgs/LOGO.png" alt="Logo" />
+      </div>
+      <div class="nav-items">
+        <a href="../htmls/home.html">&nbsp;&nbsp;&nbsp;Home&nbsp;&nbsp;&nbsp;</a>
+        <a href="../htmls/about.html">&nbsp;&nbsp;&nbsp;About&nbsp;&nbsp;&nbsp;</a>
+        <a href="../htmls/order.html">&nbsp;&nbsp;&nbsp;Order&nbsp;&nbsp;&nbsp;</a>
+        <a href="#">&nbsp;&nbsp;&nbsp;Contact&nbsp;&nbsp;&nbsp;</a>
+        <a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-user"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+      </div>
+      <span class="hamburger" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+      </span>
+    </div>
+
+    <div class="sidebar" id="sidebar">
+      <span class="close-btn" onclick="toggleSidebar()">&times;</span>
+      <ul>
+        <li><a href="../htmls/home.html">Home</a></li>
+        <li><a href="../htmls/about.html">About</a></li>
+        <li><a href="../htmls/order.html">Order</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#"><i class="fas fa-user"></i></a></li>
+      </ul>
+    </div>
+
+    <div class="container contact-container">
+      <div class="row">
+        <div class="col-md-6">
+          <h2>Contact Me</h2>
+          <p class="contact-description">
+            Ready to take your digital presence to the next level? Whether you're looking to launch a new website, revamp an existing one, or need expert advice on the best web technologies, I'm here to help. Reach out to discuss your project, ask questions, or just say hello.
+          </p>
+        </div>
+        <div class="col-md-6">
+          <form action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="7fcc5823-e46a-4463-b869-cca91661e22c">
+            <div class="form-group">
+              <input type="text" class="form-control" name="name" placeholder="Your Full Name" required>
+            </div>
+            <div class="form-group">
+              <input type="email" class="form-control" name="email" placeholder="Your Email" required>
+            </div>
+            <div class="form-group">
+              <textarea class="form-control" rows="5" name="Message" placeholder="Your Message" required></textarea>
+            </div>
+            <button type="submit" class="btn send-button">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <footer id="footer"><hr>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <a href="index.html">
+          <img src="../imgs/Kiruba__1_-removebg-preview.png" 
+               alt="Footer Logo" class="img-fluid logo-footer">
+        </a>
+      </div>
+      <div class="col-md-3">
+        <div class="useful-link">
+          <h2>Useful Links</h2>
+          <img src="./assets/images/about/home_line.png" alt="" class="img-fluid">
+          <ul class="use-links" style="list-style-type: none;">
+            <li><a href="index.html"><i class="fa-solid fa-angles-right"></i> Home</a></li>
+            <li><a href="about.html"><i class="fa-solid fa-angles-right"></i> About Us</a></li>
+            <li><a href="gallery.html"><i class="fa-solid fa-angles-right"></i> Order</a></li>
+            <li><a href="contact.html"><i class="fa-solid fa-angles-right"></i> Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="col-md-3">
+        <div class="social-links">
+          <h2>Follow Us</h2>
+          <img src="./assets/images/about/home_line.png" alt="">
+          <ul class="social-icons"style="list-style-type: none;">
+            <li><a href="#"><i class="fab fa-facebook-f" id="facebook-icon"></i></a></li>
+            <li><a href="#"><i class="fab fa-instagram" id="instagram-icon"></i></a></li>
+            <li><a href="#"><i class="fab fa-linkedin-in" id="linkedin-icon"></i></a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="col-md-3">
+        <div class="address">
+          <h2>Address</h2>
+          <img src="./assets/images/about/home_line.png" alt="" class="img-fluid">
+          <ul class="address-links"style="list-style-type: none;">
+            <li class="address1">
+              <i class="fa-solid fa-location-dot"></i> Balan Nagar,Pudukkottai,Tamilnadu
+            </li>
+            <li><a href="tel:+9190904500112"><i class="fa-solid fa-phone"></i> +91 9876543210</a></li>
+            <li><a href="mailto:skirubakaran2005@gmail.com"><i class="fa-solid fa-envelope"></i> skirubakaran2005@gmail.com</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home</title>
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    rel="stylesheet"
+  />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    .video-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    .centered-content {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: white;
+      z-index: 1;
+    }
+
+    .centered-content h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .centered-content p {
+      font-size: 1.2rem;
+    }
+
+    .navbar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      z-index: 1000;
+    }
+
+    .navbar .logo img {
+      height: 40px;
+      width: 120px;
+    }
+
+    .navbar .nav-items {
+      display: flex;
+      gap: 20px;
+    }
+
+    .navbar .nav-items a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .navbar .nav-items a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background-color: red;
+      transition: width 0.3s ease-in-out;
+    }
+
+    .navbar .nav-items a:hover::after {
+      width: 100%;
+    }
+
+    .hamburger {
+      display: none;
+      font-size: 24px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 250px;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+      z-index: 9999;
+      padding-top: 20px;
+    }
+
+    .sidebar.active {
+      transform: translateX(0);
+    }
+
+    .sidebar .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 24px;
+      cursor: pointer;
+      color: white;
+      padding: 10px;
+      z-index: 10000;
+    }
+
+    .sidebar ul {
+      list-style-type: none;
+      padding-left: 20px;
+      margin-top: 30px;
+    }
+
+    .sidebar ul li {
+      padding: 10px 0;
+    }
+
+    .sidebar ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sidebar ul li a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background-color: red;
+      transition: width 0.3s ease-in-out;
+    }
+
+    .sidebar ul li a:hover::after {
+      width: 100%;
+    }
+
+    @media (max-width: 768px) {
+      .navbar .nav-items {
+        display: none;
+      }
+      .hamburger {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+  <video autoplay muted loop class="video-bg">
+    <source src="..//imgs/home.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+
+  <div class="navbar">
+    <div class="logo">
+      <img src="../imgs/LOGO.png" alt="Logo" />
+    </div>
+    <div class="nav-items">
+      <a href="#">&nbsp;&nbsp;&nbsp;Home&nbsp;&nbsp;&nbsp;</a>
+      <a href="../htmls/about.html"
+        >&nbsp;&nbsp;&nbsp;About&nbsp;&nbsp;&nbsp;</a
+      >
+      <a href="../htmls/order.html">&nbsp;&nbsp;&nbsp;Order&nbsp;&nbsp;&nbsp;</a>
+      <a href="../htmls/contact.html">&nbsp;&nbsp;&nbsp;Contact&nbsp;&nbsp;&nbsp;</a>
+      <a href="../htmls/profile.html"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-user"></i
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a
+      >
+    </div>
+    <span class="hamburger" onclick="toggleSidebar()">
+      <i class="fas fa-bars"></i>
+    </span>
+  </div>
+
+  <div class="centered-content">
+    <h1>Welcome to Our Site</h1>
+    <p>Experience the best content on our platform</p>
+    <br />
+    <button
+      type="button"
+      class="btn btn-block"
+      style="
+        background-color: rgb(255, 0, 0);
+        color: #ffffff;
+        border-radius: 10px 10px;
+        height: 30px;
+        width: 55px;
+        cursor: pointer;
+      "
+    >
+      Menu
+    </button>
+  </div>
+
+  <div class="sidebar" id="sidebar">
+    <span class="close-btn" onclick="toggleSidebar()">&times;</span>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="../htmls/about.html">About</a></li>
+      <li><a href="../htmls/order.html">Order</a></li>
+      <li><a href="../htmls/contact.html">Contact</a></li>
+      <li>
+        <a href="#"><i class="fas fa-user"></i></a>
+      </li>
+    </ul>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      document.getElementById("sidebar").classList.toggle("active");
+    }
+  </script>
+</body>
+</html>
