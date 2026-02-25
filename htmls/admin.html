@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Add Foods</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-4">
+    <h1 class="text-center">Admin Panel - Add Foods</h1>
+    <form id="foodForm" class="mt-4" enctype="multipart/form-data">
+  <div class="mb-3">
+    <label for="foodName" class="form-label">Food Name</label>
+    <input type="text" id="foodName" name="name" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label for="foodCategory" class="form-label">Category</label>
+    <input type="text" id="foodCategory" name="category" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label for="foodRating" class="form-label">Rating</label>
+    <input type="text" id="foodRating" name="rating" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label for="foodPrice" class="form-label">Price</label>
+    <input type="number" id="foodPrice" name="price" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label for="foodImage" class="form-label">Image</label>
+    <input type="file" id="foodImage" name="image" class="form-control" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Add Food</button>
+</form>
+
+<script>
+  document.getElementById("foodForm").addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData();
+    formData.append("name", document.getElementById("foodName").value);
+    formData.append("category", document.getElementById("foodCategory").value);
+    formData.append("rating", document.getElementById("foodRating").value);
+    formData.append("price", document.getElementById("foodPrice").value);
+    formData.append("image", document.getElementById("foodImage").files[0]);
+
+    try {
+      const response = await fetch("http://localhost:3000/api/foods", {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        alert("Food added successfully!");
+        document.getElementById("foodForm").reset();
+      } else {
+        alert("Error: " + result.error);
+      }
+    } catch (err) {
+      console.error("Error:", err);
+      alert("An error occurred while adding the food.");
+    }
+  });
+</script>
+</body>
+</html>

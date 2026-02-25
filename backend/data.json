@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "name": "Sree Annapoorna Ladoo",
+    "category": "street food",
+    "rating": "4.8",
+    "price": 100,
+    "img": "your-image-path1.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Sri Krishna Sweets",
+    "category": "desserts",
+    "rating": "4.8",
+    "price": 150,
+    "img": "your-image-path2.jpg"
+  }
+]
