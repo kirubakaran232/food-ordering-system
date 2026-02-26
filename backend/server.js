@@ -213,7 +213,9 @@ const PORT = 3000;
 require("dotenv").config();
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: "https://food-ordering-system-theta.vercel.app"
+}));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // MongoDB Connection
